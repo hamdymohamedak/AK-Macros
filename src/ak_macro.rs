@@ -26,7 +26,7 @@ macro_rules! input_prompt {
         let _ = stdout().flush();
         let mut input = String::new();
         stdin().read_line(&mut input).expect("Failed to read input");
-        input.trim().to_string()
+        input.trim().parse().expect("Please enter a valid input")
     }};
 }
 #[macro_export]
@@ -67,6 +67,17 @@ macro_rules! use_loop {
             if $should_execute {
                 $the_method;
             }
+        }
+    };
+}
+
+#[macro_export]
+macro_rules! if_cond {
+    ($var:expr, $condition:expr, $first_method:expr, $last_method:expr) => {
+        if $condition {
+            $first_method
+        } else {
+            $last_method
         }
     };
 }
