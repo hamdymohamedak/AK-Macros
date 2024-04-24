@@ -1,40 +1,18 @@
 use std::fs;
-use std::io::{stdin, stdout, Write};
-mod ak_macro;
+mod lib;
 fn main() {
-    // Rust with AK-macros is a easy to learn
-
-    // // to print use akp!("")
+    
     akp!("hello world");
 
-    // // to get input from user use input_prompt!("")
-    let x: String = input_prompt!("Enter Your Age:");
+    let my_name = input_prompt!("Enter the Name for Best crate. ?");
 
-    // // to remove file use remove_folder!(add the path)
-    remove_file!("/home/ak/Desktop/t");
-
-    // // to remove folder use remove_folder!("add the path")
-    remove_folder!("/home/ak/Desktop/t");
-
-    // // (true,fromNumber,ToNumber,character,{method})
-    // //Example
-    use_loop!(true, 0, 100, i, { println!("{} - Numbers", i) });
-
-    // use if_cond to type a shortcut for if condation
-    let x = 5;
     if_cond!(
-        x,
-        x == 5,
-        println!("x == Five"),  // if
-        println!("x not Five")  // else
+        my_name,
+        my_name == "ak-macros",
+        akp!("hello devs. ak-macros make rust be a simple"),
+        akp!("Take your time I'm sure you will fall in love with ak-macors")
     );
 
-    // simple app
-    let my_name: String = input_prompt!("Enter your name: ");
-    if_cond!(
-        &my_name,
-        &my_name == "hamdy",
-        println!("You are hamdy"),                   //if
-        remove_folder!("/home/ak/Desktop/Projects")  // else
-    );
+    
+
 }
