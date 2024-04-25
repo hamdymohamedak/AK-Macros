@@ -43,10 +43,10 @@ fn main() {
         my_name == "ak-macros",
         akp!("hello devs. ak-macros make rust be a simple"),
         akp!("Take your time I'm sure you will fall in love wit# AK-Macros
+```
 # Description
 
-AK-Macros is a macros library for Rust programming language, designed to showcase and facilitate the usage of macros in Rust projects. Macros are a powerful feature in Rust that allows developers to write code that generates other code, enabling metaprogramming and abstraction.
-
+AK-Macros is a macros library for Rust programming language, designed to showcase and facilitate the usage of macros in Rust projects. Macros are 
 # Features
 Provides a collection of macros for common programming tasks.
 Demonstrates how macros can improve code readability and maintainability.
@@ -71,36 +71,8 @@ fn main() {
     akp!("My Name:{}",my_name);
 }
 ```
-
-# simple App with Ak-Macros
-
-```rust 
-mod lib;
-fn main() {
-    
-    akp!("hello world");
-
-    let my_name = input_prompt!("Enter the Name for Best crate. ?");
-
-    if_cond!(
-        my_name,
-        my_name == "ak-macros",
-        akp!("hello devs. ak-macros make rust be a simple"),
-        akp!("Take your time I'm sure you will fall in love with ak-Macros")
-    );
-
-    
-
-}
-```
 # Rust Code Vs Ak-Macros
 ![Image Description](target/IMG_20240424_064108_421.png)
 h ak-Macros")
     );
-
-    
-
 }
-```
-# Rust Code Vs Ak-Macros
-![Image Description](target/IMG_20240424_064108_421.png)
