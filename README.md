@@ -16,7 +16,7 @@ Error Handling: AK-Macros offers custom error handling macros that abstract away
 Performance Optimization: AK-Macros can be used to optimize performance-critical code by generating specialized code tailored to specific use cases, leading to more efficient code execution.
 
 # Usage
-```
+```rust
 Import the macros library File
 
 mod lib.rs;
@@ -29,7 +29,7 @@ fn main() {
 
 # simple App with Ak-Macros
 
-``` 
+```rust 
 mod lib;
 fn main() {
     
