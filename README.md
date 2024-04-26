@@ -29,9 +29,6 @@ fn main() {
     akp!("My Name:{}",my_name);
 }
 ```
-
-### Usage <span style="color:green;"><strong>You can delete All dependencies and install it if you need it for best performance</strong></span>
-
 # simple App with Ak-Macros
 
 ```rust
