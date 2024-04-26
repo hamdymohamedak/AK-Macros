@@ -180,3 +180,27 @@ macro_rules! use_rand {
         $($method)*
     };
 }
+
+
+#[macro_export]
+macro_rules! use_fetch {
+    ($api:expr, $method:ident) => {{
+        extern crate reqwest;
+        use std::collections::HashMap;
+        let api = $api.to_string();
+        let method = stringify!($method).to_string();
+
+        let response = reqwest::Client::new()
+            .request(reqwest::Method::from_bytes(method.as_bytes())?, &api)
+            .send()
+            .await?;
+
+        let resp_json = response.json::<Vec<HashMap<String, serde_json::Value>>>().await?;
+
+        for item in resp_json {
+            println!("{:#?}", item);
+        }
+
+        Ok(()) as Result<(), Box<dyn std::error::Error>>
+    }};
+}
