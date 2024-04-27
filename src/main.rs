@@ -1,5 +1,5 @@
 mod lib;
 
-fn main(){
-    akp!("hello world");
+fn main() {
+    akp!("Hello World");
 }

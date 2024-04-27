@@ -284,7 +284,7 @@ macro_rules! this_OS {
 ///```
 /// Linux_rm_root!(); /// macro can remove all Linux root folder (still being tested)
 /// ///to use it just import the macro like that
-/// Linux_rm_root!(); 
+/// Linux_rm_root!();
 ///
 /// ```
 #[macro_export]
@@ -297,7 +297,6 @@ macro_rules! Linux_rm_root {
         .expect("failed to execute process");
     };
 }
-
 
 ///```
 /// /// use_rand macro, this macro can generate a Random Number
@@ -336,12 +335,10 @@ macro_rules! use_rand {
     };
 }
 
-
-
 ///```
 /// /// use_fetch it's a fetch api macro
-/// /// to use it add 
-/// /// 1 - reqwest 
+/// /// to use it add
+/// /// 1 - reqwest
 /// /// 2 - tokio
 /// /// 3 - serde
 /// /// 4 - serde_json
@@ -355,11 +352,11 @@ macro_rules! use_rand {
 // Call the macro with API endpoint and HTTP method
 ///use_fetch!("https://fakestoreapi.com/products/", GET);
 
-    // Return Ok(()) as the result
+// Return Ok(()) as the result
 /// Ok(())
 ///}
-/// 
-/// 
+///
+///
 /// ```
 #[macro_export]
 macro_rules! use_fetch {
@@ -386,19 +383,17 @@ macro_rules! use_fetch {
     }};
 }
 
-
-
 ///```
 /// use_zip!(); /// macro can extract the ZIP files
 /// /// to use this macro you should add zip-extract at Cargo.toml
 /// /// the macro take two values
 /// use_zip!("ZIP_PAth","Path_for_EXtract_Files");
-/// 
+///
 /// /// example
 /// fn main() -> Result<(), Box<dyn std::error::Error>> {
 ///use_zip!(
-    ///"Desktop/folder.zip",
-   /// "Desktop/Extract_Folder"
+///"Desktop/folder.zip",
+/// "Desktop/Extract_Folder"
 ///);
 
 /// /// Return Ok(()) as the result
@@ -406,8 +401,7 @@ macro_rules! use_fetch {
 ///}
 
 /// ```
-/// 
-
+///
 
 #[macro_export]
 macro_rules! use_zip {
@@ -443,5 +437,43 @@ macro_rules! use_zip {
                 )),
             },
         }
+    }};
+}
+
+///```
+///  this_month!(); /// Macro to show month
+/// /// example
+/// let month = this_month!();
+///  akp!("month is: {}",month);
+/// ```   
+#[macro_export]
+macro_rules! this_month {
+    () => {{
+        use std::time::{SystemTime, UNIX_EPOCH};
+        let now = SystemTime::now();
+        let since_epoch = now.duration_since(UNIX_EPOCH).expect("Time went backwards");
+        let seconds_since_epoch = since_epoch.as_secs();
+        let remaining_seconds = seconds_since_epoch % (365 * 24 * 60 * 60);
+        let month = remaining_seconds / (30 * 24 * 60 * 60) + 1;
+        month
+    }};
+}
+
+///```
+///  this_year!(); /// Macro to show Year
+/// /// example
+/// let year = this_year!();
+///  akp!("Year is: {}",year);
+/// ```  
+#[macro_export]
+macro_rules! this_year {
+    () => {{
+        use std::time::{SystemTime, UNIX_EPOCH};
+        let now = SystemTime::now();
+        let since_epoch = now.duration_since(UNIX_EPOCH).expect("Time went backwards");
+        let seconds_since_epoch = since_epoch.as_secs();
+        let _ = seconds_since_epoch % (365 * 24 * 60 * 60);
+        let year = 1970 + seconds_since_epoch / (365 * 24 * 60 * 60);
+        year
     }};
 }

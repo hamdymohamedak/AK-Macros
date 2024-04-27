@@ -1,6 +1,6 @@
 [package]
 name = "ak_macros"
-version = "0.1.4"
+version = "0.1.6"
 edition = "2021"
 readme = "README.md"
 authors = ["Hamdy-Mohamedak <mohameddhamdy407@gmail.com>"]
