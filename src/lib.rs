@@ -477,3 +477,30 @@ macro_rules! this_year {
         year
     }};
 }
+///```
+/// /// open_web macro can open a url at browser
+/// ///the macro take one value this value is the URL Link
+/// ///example
+/// open_Web!("https://askander.vercel.app");
+/// ```
+#[macro_export]
+macro_rules! open_Web {
+    ($website_url:expr) => {
+        use std::process::Command;
+        let url = $website_url;
+
+        let result = if cfg!(target_os = "windows") {
+            Command::new("cmd").arg("/C").arg("start").arg(url).spawn()
+        } else if cfg!(target_os = "macos") {
+            Command::new("open").arg(url).spawn()
+        } else {
+            Command::new("xdg-open").arg(url).spawn()
+        };
+
+        // Check if the command executed successfully
+        match result {
+            Ok(_) => println!("Successfully opened website."),
+            Err(e) => eprintln!("Failed to open website: {}", e),
+        }
+    };
+}
