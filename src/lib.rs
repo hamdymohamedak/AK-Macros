@@ -489,3 +489,52 @@ macro_rules! open_Web {
         }
     };
 }
+
+///```
+/// /// macro can convert the string from lowerCase to UpperCase
+///   use_upper_case!(name);
+///   println!("{}",name);
+/// ```
+#[macro_export]
+macro_rules! use_upper_case {
+    ($input:ident) => {
+        $input = $input.to_uppercase();
+    };
+}
+
+///```
+/// /// macro can convert the string from upperCase to lowerCase
+///    use_lower_case!(name);
+///   println!("{}",name);
+/// ```
+#[macro_export]
+macro_rules! use_lower_case {
+    ($input:ident) => {
+        $input = $input.to_lowercase();
+    };
+}
+
+///```
+/// /// macro can create a file and add text at him
+/// /// example
+///fn main() -> std::io::Result<()> {
+///use_createFile!("ak2","/home/ak/Desktop","Hello from ak-macros");
+///Ok(())
+/// }
+/// /// the macro take three value
+/// /// 1 - File name
+/// /// 2 - File Path
+/// /// 3 - Text
+/// ```
+#[macro_export]
+macro_rules! use_createFile {
+    ($file_name:expr, $file_path:expr,$input_text:expr) => {
+        use std::fs::File;
+        use std::io::prelude::*;
+        use std::path::{Path, PathBuf}; // Import PathBuf for constructing paths
+
+        let file_path = PathBuf::from($file_path).join($file_name); // Construct the file path
+        let mut file = File::create(&file_path)?; // Use ? to propagate errors
+        file.write_all($input_text.as_bytes())?; // Use ? to propagate errors
+    };
+}
