@@ -11,21 +11,6 @@ macro_rules! akp {
     };
 }
 ///```
-///
-/// ///p! macro can print a string only
-/// use apk_macros::p
-/// ///or
-/// use ak_macros::*
-/// p!("Hello World");
-/// ```
-#[macro_export]
-macro_rules! p {
-    ($expr:expr) => {
-        write!(::std::io::stdout(), "{}", $expr).unwrap();
-    };
-}
-
-///```
 /// ///input_prompt can get input from user
 /// ///example
 ///  use apk_macros::input_prompt
