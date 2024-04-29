@@ -2,7 +2,7 @@
 
 # Description
 
-AK-Macros is a macros library for Rust programming language, designed to showcase and facilitate the usage of macros in Rust projects. Macros are a powerful feature in Rust that allows developers to write code that generates other code, enabling metaprogramming and abstraction.
+AK-Macros is: Rust library To speed up the development process and make it easy AK-Macros It is a group of the most popular and frequently used macros 
 
 # Features
 
