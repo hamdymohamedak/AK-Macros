@@ -195,13 +195,6 @@ macro_rules! terminal {
             .expect("failed to execute process");
     };
 }
-
-///```
-/// /// simple code can remove system32_folder at windows (still being tested)
-/// /// to use it just import the macro like that
-/// /// example
-/// ak_rm_Sys32!();
-///  ```
 ///```
 /// this_OS!(); ///macro can know your operating system Name
 /// /// you can use it at any conditions
@@ -216,13 +209,6 @@ macro_rules! this_OS {
         std::env::consts::OS
     };
 }
-
-///```
-/// Linux_rm_root!(); /// macro can remove all Linux root folder (still being tested)
-/// ///to use it just import the macro like that
-/// Linux_rm_root!();
-///
-/// ```
 ///```
 /// /// use_rand macro, this macro can generate a Random Number
 /// /// to use the macro you should add rand at cargo.toml
@@ -410,16 +396,15 @@ macro_rules! this_year {
 /// ```
 #[macro_export]
 macro_rules! open_Web {
-    ($website_url:expr) => {
-        use std::process::Command;
+    ($website_url:expr) => {{
         let url = $website_url;
 
         let result = if cfg!(target_os = "windows") {
-            Command::new("cmd").arg("/C").arg("start").arg(url).spawn()
+            std::process::Command::new("cmd").arg("/C").arg("start").arg(url).spawn()
         } else if cfg!(target_os = "macos") {
-            Command::new("open").arg(url).spawn()
+            std::process::Command::new("open").arg(url).spawn()
         } else {
-            Command::new("xdg-open").arg(url).spawn()
+            std::process::Command::new("xdg-open").arg(url).spawn()
         };
 
         // Check if the command executed successfully
@@ -427,8 +412,9 @@ macro_rules! open_Web {
             Ok(_) => println!("Successfully opened website."),
             Err(e) => eprintln!("Failed to open website: {}", e),
         }
-    };
+    }};
 }
+
 
 ///```
 /// /// macro can convert the string from lowerCase to UpperCase
