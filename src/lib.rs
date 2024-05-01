@@ -400,7 +400,11 @@ macro_rules! open_Web {
         let url = $website_url;
 
         let result = if cfg!(target_os = "windows") {
-            std::process::Command::new("cmd").arg("/C").arg("start").arg(url).spawn()
+            std::process::Command::new("cmd")
+                .arg("/C")
+                .arg("start")
+                .arg(url)
+                .spawn()
         } else if cfg!(target_os = "macos") {
             std::process::Command::new("open").arg(url).spawn()
         } else {
@@ -414,7 +418,6 @@ macro_rules! open_Web {
         }
     }};
 }
-
 
 ///```
 /// /// macro can convert the string from lowerCase to UpperCase
@@ -463,4 +466,113 @@ macro_rules! use_createFile {
         let mut file = File::create(&file_path)?; // Use ? to propagate errors
         file.write_all($input_text.as_bytes())?; // Use ? to propagate errors
     };
+}
+
+///```
+/// /// This macro places a string in the memory,
+/// /// and if you define a new variable that carries the value of that string,
+/// /// it will not take up a new space in the memory.
+/// ///example
+/// let my_name = set_String!("ak Macros crate");
+/// akp!("{}",my_name);
+///```
+#[macro_export]
+macro_rules! set_String {
+    ($the_text:expr) => {
+        String::from($the_text)
+    };
+}
+
+///```
+/// /// Positive_number macro can set Positive Numbers Only
+/// /// example
+/// let num = Positive_number!(20);
+/// akp!("Age is :{}", num); //OutPut:  Age is :20
+
+/// /// Wrong Syntax
+///let num = Positive_number!(-20);
+///akp!("{}", num); /// Number Must be Positive
+/// ```
+#[macro_export]
+macro_rules! Positive_number {
+    ($num:expr) => {{
+        let num = $num;
+        if num < 0 {
+            panic!("Number must be positive!");
+        }
+        num as usize
+    }};
+}
+
+///```
+/// /// Positive_number macro can set Positive Numbers Only
+/// /// example
+/// let num = Negative_number!(-20);
+/// akp!("Age is :{}", num); //OutPut:  Age is :-20
+
+/// /// Wrong Syntax
+///let num = Negative_number!(20);
+///akp!("{}", num); /// Number Must be Negative
+/// ```
+#[macro_export]
+macro_rules! Negative_number {
+    ($num:expr) => {{
+        let num = $num;
+        if num > 0 {
+            panic!("Number must be Negative!");
+        }
+        num as isize
+    }};
+}
+
+///```
+/// ///Ram_size Macro can get the All Ram Size
+/// /// example
+/// let my_ram = Ram_size!();
+/// akp!("Total RAM: {:.2} GB", my_ram); /// Total RAM: 7.67 GB
+/// akp!("Total RAM: {} GB", my_ram); // Total RAM: 7.670555114746094 GB
+/// ```
+#[macro_export]
+macro_rules! Ram_size {
+    () => {{
+        let mut ram_gb = 0.0;
+        if let Ok(meminfo) = std::fs::read_to_string("/proc/meminfo") {
+            for line in meminfo.lines() {
+                if line.starts_with("MemTotal:") {
+                    let ram_kb: u64 = line.split_whitespace().nth(1).unwrap().parse().unwrap();
+                    ram_gb = ram_kb as f64 / 1024.0 / 1024.0;
+                    break;
+                }
+            }
+        } else {
+            eprintln!("Failed to read /proc/meminfo");
+        }
+        ram_gb
+    }};
+}
+///```
+/// /// Get_CPU macro can get the cpu informaion
+/// /// example
+/// let my_cpu = Get_CPU!();
+/// akp!("My CPU is:  {}",my_cpu);
+/// ```
+#[macro_export]
+macro_rules! Get_CPU {
+    () => {{
+        let mut cpu_name = String::new();
+        if let Ok(cpuinfo) = std::fs::read_to_string("/proc/cpuinfo") {
+            for line in cpuinfo.lines() {
+                if line.starts_with("model name") {
+                    let parts: Vec<&str> = line.split(":").collect();
+                    if parts.len() >= 2 {
+                        cpu_name = parts[1].trim().to_string();
+                        break; // Once we've found the CPU name, we can break out of the loop
+                    }
+                }
+            }
+        } else {
+            println!("Failed to read CPU info.");
+        }
+        cpu_name
+    }};
 }
