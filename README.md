@@ -1,5 +1,5 @@
 # AK-Macros
-<div style="text-align:center;">
+<div align="center">
   <img src="target/a-captivating-3d-render-of-a-sleek-and-modern-logo-_0LERj17QDmeAAbEqayczw-ZOIVHCP6TOmUnlLugiVzgA.jpeg" alt="Image Description" width="300px">
 </div>
 # Description
