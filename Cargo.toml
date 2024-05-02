@@ -1,12 +1,13 @@
 [package]
 name = "ak_macros"
-version = "0.2.1"
+version = "0.2.2"
 edition = "2021"
 readme = "README.md"
 authors = ["Hamdy-Mohamedak <mohameddhamdy407@gmail.com>"]
 description = "A crate for faster development and simpler syntax"
 license = "MIT"
 repository = "https://github.com/hamdymohamedak/AK-macro/"
+keywords = ["Ak-Macros", "macro","no_std","random","system"]
 
 [dependencies]
 # rand = "0.8.4" # use_rand Macro
