@@ -8,7 +8,7 @@ description = "A crate for faster development and simpler syntax"
 license = "MIT"
 repository = "https://github.com/hamdymohamedak/AK-macro/"
 keywords = ["Ak-Macros", "macro","no_std","random","system"]
-
+documentation= "https://ak-macros.vercel.app"
 [dependencies]
 # rand = "0.8.4" # use_rand Macro
 # reqwest = { version = "0.12", features = ["json"] } # fetch api Macro 
