@@ -187,14 +187,25 @@ macro_rules! if_cond {
 /// ```
 #[macro_export]
 macro_rules! terminal {
-    ($lang:expr, $($command:tt)*) => {
-        let _ = std::process::Command::new($lang)
+    ($lang:expr, $command:expr) => {{
+        use std::process::Command;
+        use std::io::Write;
+        use std::fs::File;
+
+        let output = Command::new($lang)
             .arg("-c")
-            .arg(concat!($($command)*))
+            .arg($command)
             .output()
             .expect("failed to execute process");
-    };
+
+        let output_str = String::from_utf8_lossy(&output.stdout);
+        let command_output = output_str.trim().to_string();
+
+        command_output // Returning the command output
+    }};
 }
+
+
 ///```
 /// this_OS!(); ///macro can know your operating system Name
 /// /// you can use it at any conditions
@@ -454,6 +465,7 @@ macro_rules! use_lower_case {
 /// /// 1 - File name
 /// /// 2 - File Path
 /// /// 3 - Text
+///
 /// ```
 #[macro_export]
 macro_rules! use_createFile {
@@ -575,4 +587,35 @@ macro_rules! Get_CPU {
         }
         cpu_name
     }};
+}
+
+/// ```
+/// ///macro can looping at any array content
+/// /// macro take three values
+/// /// 1- the array
+/// /// 2- variableName
+/// /// 3- method
+/// /// Example  
+///  let tarr: [&str; 3] = ["Max", "Jack", "Aly"];
+///   use_loopAt!(tarr, varr, {
+///       println!("hello {}", varr);
+///   });
+///});  
+/// /// you should't type Variable like that
+/// use_loopAt!(tarr,{
+/// println!("hello world");
+/// });
+///```
+#[macro_export]
+macro_rules! use_loopAt {
+    ($arr:expr, $var:ident, $method:tt) => {
+        for $var in $arr {
+            $method
+        }
+    };
+    ($arr:expr, $method:tt) => {
+        for ii in $arr {
+            $method
+        }
+    };
 }

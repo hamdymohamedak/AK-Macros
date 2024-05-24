@@ -1,11 +1,8 @@
 # AK-Macros
-<div align="center">
-  <img src="target/a-captivating-3d-render-of-a-sleek-and-modern-logo-_0LERj17QDmeAAbEqayczw-ZOIVHCP6TOmUnlLugiVzgA.jpeg" alt="Image Description" width="350px">
-</div>
 
 # Description
 
-## AK-Macros is: Rust library To speed up the development process and make it easy AK-Macros It is a group of the most popular and frequently used macros 
+## AK-Macros is: Rust library To speed up the development process and make it easy AK-Macros It is a group of the most popular and frequently used macros
 
 # Features
 
@@ -52,6 +49,20 @@ fn main() {
         akp!("Take your time I m sure you will fall in love AK-Macros")
     )
 }
+```
+
+```rust
+use ak_macros::*;
+    fn main(){
+    let result = terminal!("sh","ls");
+    akp!("{}",result)
+    // output
+    //Cargo.lock
+    //Cargo.toml
+    //README.md
+    //src
+    //target
+    }
 ```
 
 # Rust Code Vs Ak-Macros
